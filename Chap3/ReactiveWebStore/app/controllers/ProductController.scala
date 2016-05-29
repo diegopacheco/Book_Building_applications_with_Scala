@@ -21,11 +21,11 @@ class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProd
       "id"        -> optional(longNumber),  
       "name"      -> nonEmptyText,
       "details"   -> text,
-      "price"     -> longNumber
+      "price"     -> bigDecimal
     )(models.Product.apply)(models.Product.unapply))
 
   def index = Action { implicit request =>
-    val products = service.findAll().getOrElse(Seq(Product(Some(0),"","",0)))
+    val products = service.findAll().getOrElse(Seq())
     Logger.info("index called. Products: " + products)
     Ok(views.html.product_index(products))
   }

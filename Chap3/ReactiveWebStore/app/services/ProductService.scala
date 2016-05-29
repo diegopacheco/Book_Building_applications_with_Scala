@@ -9,6 +9,7 @@ trait IProductService extends BaseService[Product]{
   def remove(id:Long):Boolean
   def findById(id:Long):Option[Product]
   def findAll():Option[List[Product]]
+  def findAllProducts():Seq[(String,String)]
 }
 
 @Singleton
@@ -46,6 +47,15 @@ class ProductService extends IProductService{
   private def validateId(id:Long):Unit = {
      val entry = inMemoryDB.get(id)
      if (entry==null) throw new RuntimeException("Could not find Product: " + id)
+  }
+  
+  def findAllProducts():Seq[(String,String)] = {
+    val products:Seq[(String,String)] =  this
+          .findAll()
+          .getOrElse(List(Product(Some(0),"","",0)))
+          .toSeq
+          .map { product => (product.id.get.toString,product.name) }
+    return products
   }
   
 }
