@@ -17,13 +17,11 @@ object RxKindComplexComposition extends App {
     Future { Stream.continually(nextDouble * 1000.0 ).foreach { x => doubleInfiniteStreamSubject.onNext(x) } }
     
     var observableEven = Observable.create { doubleInfiniteStreamSubject.subscribe }
-      .take(10)
       .flatMap { x => Observable.from( Iterable.fill(1)(x + 1000) ) }
       .filter { x => x.toInt % 2 == 0 }
       .flatMap { x => Observable.just("Observable Even: " + x) }
       
     var observableOdd = Observable.create { doubleInfiniteStreamSubject.subscribe }
-      .take(10)
       .flatMap { x => Observable.from( Iterable.fill(1)(x + 1000) ) }
       .filter { x => x.toInt % 2 != 0 }
       .flatMap { x => Observable.just("Observable Odd: " + x) }
@@ -33,6 +31,7 @@ object RxKindComplexComposition extends App {
        .empty
        .merge(observableEven)
        .merge(observableOdd)
+       .take(10)
        .foreach { x => println("Observable Merge: " + x) ; cd.countDown() }
     
     cd.await()
