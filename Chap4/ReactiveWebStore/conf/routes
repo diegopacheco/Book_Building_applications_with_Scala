@@ -38,5 +38,5 @@ GET   /image/details/:id  controllers.ImageController.details(id:Long)
 #
 # Services
 #
-GET   /rx/prices  controllers.RxController.prices
-
+GET   /rx/prices   controllers.RxController.prices
+GET   /rx/aprices  controllers.RxController.pricesAsync
