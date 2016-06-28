@@ -1,14 +1,19 @@
-import com.google.inject.AbstractModule
 import java.time.Clock
-import services.{ApplicationTimer}
-import services.IProductService
-import services.ProductService
-import services.ReviewService
-import services.IReviewService
-import services.ImageService
+
+import com.google.inject.AbstractModule
+
+import javax.inject.Singleton
+import services.ApplicationTimer
 import services.IImageService
 import services.IPriceSerice
+import services.IProductService
+import services.IReviewService
+import services.IRndService
+import services.ImageService
 import services.PriceService
+import services.ProductService
+import services.ReviewService
+import services.RndService
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -34,6 +39,7 @@ class Module extends AbstractModule {
     bind(classOf[IImageService]).to(classOf[ImageService]).asEagerSingleton()
     
     bind(classOf[IPriceSerice]).to(classOf[PriceService]).asEagerSingleton()
+    bind(classOf[IRndService]).to(classOf[RndService]).asEagerSingleton()
     
   }
 

@@ -40,3 +40,7 @@ GET   /image/details/:id  controllers.ImageController.details(id:Long)
 #
 GET   /rx/prices   controllers.RxController.prices
 GET   /rx/aprices  controllers.RxController.pricesAsync
+GET   /rnd/double  controllers.RndDoubleGeneratorController.rndDouble
+GET   /rnd/call    controllers.RndDoubleGeneratorController.rndCall
+GET   /rnd/rx      controllers.RndDoubleGeneratorController.rxCall
+GET   /rnd/rxbat   controllers.RndDoubleGeneratorController.rxScalaCallBatch
