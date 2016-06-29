@@ -16,9 +16,10 @@
 		
 		@helper.inputText(product("name"),    '_label -> "Product Name")
 		@helper.inputText(product("details"), '_label -> "Product Details")
-		@helper.inputText(product("price"),   '_label -> "Price")
+		@helper.inputText(product("price"),   '_label -> "Price") 
 		
 		<div class="form-actions">
+		  <button type="button" class="btn btn-primary" onclick="javascript:loadPrice(document);" >Load Rnd Price</button>
 		  <button type="submit" class="btn btn-primary">
 		    @if(id.isDefined) { Update Product } else { New Product }
 		  </button>
