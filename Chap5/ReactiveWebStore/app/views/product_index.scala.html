@@ -17,7 +17,7 @@
         <td>@product.price</td>
         <td>
           <form method="post" action="@routes.ProductController.remove(product.id.get)">
-            <button class="btn btn-link" type="submit"><i class="icon-trash"></i>Delete</button>
+            <button id="btnDelete" name="btnDelete" class="btn btn-link" type="submit"><i class="icon-trash"></i>Delete</button>
           </form>
         </td>
       </tr>
