@@ -2,7 +2,7 @@ import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.OneBrowserPerSuite
 import org.scalatestplus.play.HtmlUnitFactory
 import org.scalatestplus.play.OneServerPerSuite
-
+ 
 class ImageControllerTestSpec  extends PlaySpec with OneServerPerSuite with OneBrowserPerSuite with HtmlUnitFactory {
   
     "ImageController" should {

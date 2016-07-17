@@ -57,7 +57,7 @@ class ProductServiceTestSpec extends PlaySpec {
           oldProduct mustBe None
         }
         
-        "not remove because does not exit" in {
+        "not remove because does not exist" in {
           intercept[RuntimeException]{
              service.remove(-1)
           }

@@ -15,7 +15,7 @@ import org.junit.runners.Suite
 class JunitSimpleSuiteTest
 
 class JunitSimpleTest extends PlaySpec with AssertionsForJUnit {
-  
+   
   @Test def testBaseService() {
     val s = new ProductService
     val result = s.findAll()

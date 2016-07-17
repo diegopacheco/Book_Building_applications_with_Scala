@@ -31,8 +31,8 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
   }
 
   "RndController" should {
-    "return an random number" in {
-      // Assuming ng-microservice is down oterwise will fail.
+    "return a random number" in {
+      // Assuming ng-microservice is down otherwise will fail.
       contentAsString(route(app, FakeRequest(GET, "/rnd/rxbat")).get) mustBe "2.3000000000000007"
     }
   }

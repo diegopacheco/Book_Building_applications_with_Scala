@@ -19,17 +19,17 @@ class ImageServiceTestSpec extends PlaySpec {
            service.update(1, image)
         }
         
-        "not update because does not exit" in {
+        "not update because does not exist" in {
           intercept[RuntimeException]{
              service.update(333,null)
           }
         }
         
-        "find the review 1" in {
-           val review = service.findById(1)
-           review.get.id mustBe Some(1)
-           review.get.productId mustBe Some(1)
-           review.get.url mustBe "http://www.google.com.br/myimage"
+        "find the image" in {
+           val image = service.findById(1)
+           image.get.id mustBe Some(1)
+           image.get.productId mustBe Some(1)
+           image.get.url mustBe "http://www.google.com.br/myimage"
         }
         
         "find all" in {
@@ -40,15 +40,15 @@ class ImageServiceTestSpec extends PlaySpec {
           reviews.get(0).url mustBe "http://www.google.com.br/myimage"
         }
         
-        "remove 1 product" in {
-          val product = service.remove(1)
-          product mustBe true
+        "remove 1 image" in {
+          val image = service.remove(1)
+          image mustBe true
           
-          val oldProduct = service.findById(1)
-          oldProduct mustBe None
+          val oldImage = service.findById(1)
+          oldImage mustBe None
         }
         
-        "not remove because does not exit" in {
+        "not remove because does not exist" in {
           intercept[RuntimeException]{
              service.remove(-1)
           }
