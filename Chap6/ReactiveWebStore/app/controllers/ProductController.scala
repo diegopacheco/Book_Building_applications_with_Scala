@@ -12,10 +12,11 @@ import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
 import services.IProductService
 import play.Application
+import utils.Awaits
 
 @Singleton
 class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProductService) extends Controller with I18nSupport {
-    
+   
     val productForm: Form[Product] = Form(
     mapping(
       "id"        -> optional(longNumber),  
@@ -25,7 +26,7 @@ class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProd
     )(models.Product.apply)(models.Product.unapply))
 
   def index = Action { implicit request =>
-    val products = service.findAll().getOrElse(Seq())
+    val products = Awaits.get(5,service.findAll()).getOrElse(Seq())
     Logger.info("index called. Products: " + products)
     Ok(views.html.product_index(products))
   }
@@ -37,7 +38,7 @@ class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProd
 
   def details(id: Long) = Action { implicit request =>
     Logger.info("details called. id: " + id)
-    val product = service.findById(id).get
+    val product = Awaits.get(5,service.findById(id)).get
     Ok(views.html.product_details(Some(id), productForm.fill(product)))
   }
 
@@ -48,8 +49,8 @@ class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProd
         BadRequest(views.html.product_details(None, form))
       },
       product => {
-        val id = service.insert(product)
-        Redirect(routes.ProductController.index).flashing("success" -> Messages("success.insert", id))
+        service.insert(product)
+        Redirect(routes.ProductController.index).flashing("success" -> Messages("success.insert", "new product created"))
       })
   }
 
@@ -66,7 +67,12 @@ class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProd
   }
 
   def remove(id: Long)= Action {
-      service.findById(id).map { product =>
+    
+      import play.api.libs.concurrent.Execution.Implicits.defaultContext
+    
+      val result =  Awaits.get(5,service.findById(id))
+      
+      result.map { product =>
         service.remove(id)
         Redirect(routes.ProductController.index).flashing("success" -> Messages("success.delete", product.name))
       }.getOrElse(NotFound)

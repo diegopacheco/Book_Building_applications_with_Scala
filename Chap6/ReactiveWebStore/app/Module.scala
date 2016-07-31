@@ -1,7 +1,5 @@
 import java.time.Clock
-
 import com.google.inject.AbstractModule
-
 import javax.inject.Singleton
 import services.ApplicationTimer
 import services.IImageService
@@ -14,6 +12,8 @@ import services.PriceService
 import services.ProductService
 import services.ReviewService
 import services.RndService
+import dao.IProductDao
+import dao.ProductDao
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -40,6 +40,8 @@ class Module extends AbstractModule {
     
     bind(classOf[IPriceSerice]).to(classOf[PriceService]).asEagerSingleton()
     bind(classOf[IRndService]).to(classOf[RndService]).asEagerSingleton()
+    
+    bind(classOf[IProductDao]).to(classOf[ProductDao]).asEagerSingleton()
     
   }
 

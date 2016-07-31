@@ -2,12 +2,14 @@ import org.scalatestplus.play._
 import scala.collection.mutable
 import services.IReviewService
 import services.ReviewService
+import mocks.ReviewMockedDao
+import utils.Awaits
 
 class ReviewServiceTestSpec extends PlaySpec {
     
       "ReviewService" must {
         
-        val service:IReviewService = new ReviewService
+        val service:IReviewService = new ReviewService(new ReviewMockedDao)
       
         "insert a review properly" in {
            val review = new models.Review(Some(1),Some(1),"diegopacheco","Testing is Cool")
@@ -26,7 +28,7 @@ class ReviewServiceTestSpec extends PlaySpec {
         }
         
         "find the review 1" in {
-           val review = service.findById(1)
+           val review =  Awaits.get(5,service.findById(1))
            review.get.id mustBe Some(1)
            review.get.author mustBe "diegopacheco"
            review.get.comment mustBe "Testing so so Cool"
@@ -34,7 +36,7 @@ class ReviewServiceTestSpec extends PlaySpec {
         }
         
         "find all" in {
-          val reviews = service.findAll()
+          val reviews = Awaits.get(5,service.findAll())
           reviews.get.length mustBe 1
           reviews.get(0).id mustBe Some(1)
           reviews.get(0).author mustBe "diegopacheco"

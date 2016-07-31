@@ -1,17 +1,11 @@
 package services
 
-import java.util.concurrent.atomic.AtomicLong
-import scala.collection.mutable.HashMap
+import scala.concurrent.Future
 
 trait BaseService[A] {
-  
-  var inMemoryDB = new HashMap[Long,A]
-  var idCounter = new AtomicLong(0)
-  
-  def insert(a:A):Long
-  def update(id:Long,a:A):Boolean
-  def remove(id:Long):Boolean
-  def findById(id:Long):Option[A]
-  def findAll():Option[List[A]]
-  
+  def insert(a:A):Future[Unit]
+  def update(id:Long,a:A):Future[Unit]
+  def remove(id:Long):Future[Int]
+  def findById(id:Long):Future[Option[A]]
+  def findAll():Future[Option[Seq[A]]]
 }

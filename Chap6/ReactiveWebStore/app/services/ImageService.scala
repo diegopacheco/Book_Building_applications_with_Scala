@@ -1,52 +1,51 @@
 package services
 
-import javax.inject._
+import scala.concurrent.Future
+
+import dao.ImageDao
+import javax.inject.Inject
+import javax.inject.Singleton
 import models.Image
-import scala.collection.mutable.HashMap
-import java.util.concurrent.atomic.AtomicLong
+import play.api.libs.concurrent.Execution.Implicits
+import utils.Awaits
 
 trait IImageService extends BaseService[Image]{
-  def insert(image:Image):Long
-  def update(id:Long,image:Image):Boolean
-  def remove(id:Long):Boolean
-  def findById(id:Long):Option[Image]
-  def findAll():Option[List[Image]]
+  def insert(image:Image):Future[Unit]
+  def update(id:Long,image:Image):Future[Unit]
+  def remove(id:Long):Future[Int]
+  def findById(id:Long):Future[Option[Image]]
+  def findAll():Future[Option[Seq[Image]]]
 }
 
 @Singleton
-class ImageService extends IImageService{
-    
-  def insert(image:Image):Long = {
-     val id = idCounter.incrementAndGet();
-     image.id = Some(id)
-     inMemoryDB.put(id, image)
-     id
+class ImageService @Inject() (dao:ImageDao) extends IImageService {
+  
+  import play.api.libs.concurrent.Execution.Implicits.defaultContext
+  
+  def insert(image:Image):Future[Unit] = {
+     dao.insert(image)
   }
   
-  def update(id:Long,image:Image):Boolean = {
-     validateId(id)
-     image.id = Some(id)
-     inMemoryDB.put(id, image)
-     true  
+  def update(id:Long,image:Image):Future[Unit] = {
+     image.id =  Option(id.toInt)
+     dao.update(image)
   }
   
-  def remove(id:Long):Boolean = {
-     validateId(id)
-     inMemoryDB.remove(id)
-     true
+  def remove(id:Long):Future[Int] = {
+     dao.remove(id)
   }
   
-  def findById(id:Long):Option[Image] = {
-     inMemoryDB.get(id)
+  def findById(id:Long):Future[Option[Image]] = {
+     dao.findById(id)
   }
   
-  def findAll():Option[List[Image]] = {
-     if (inMemoryDB.values.toList == null || inMemoryDB.values.toList.size==0) return None
-     Some(inMemoryDB.values.toList)
+  def findAll():Future[Option[Seq[Image]]] = {
+     dao.findAll().map { x => Option(x) }
   }
   
   private def validateId(id:Long):Unit = {
-     val entry = inMemoryDB.get(id)
+     val future = findById(id)
+     val entry  = Awaits.get(5, future)  
      if (entry==null ||entry.equals(None) ) throw new RuntimeException("Could not find Image: " + id)
   }
   

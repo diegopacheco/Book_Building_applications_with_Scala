@@ -14,6 +14,7 @@ import services.IProductService
 import play.Application
 import services.IReviewService
 import models.Review
+import utils.Awaits
 
 @Singleton
 class ReviewController @Inject() 
@@ -31,7 +32,7 @@ extends Controller with I18nSupport {
     )(models.Review.apply)(models.Review.unapply))
 
   def index = Action { implicit request =>
-    val reviews = service.findAll().getOrElse(Seq())
+    val reviews = Awaits.get(5,service.findAll()).getOrElse(Seq())
     Logger.info("index called. Reviews: " + reviews)
     Ok(views.html.review_index(reviews))
   }
@@ -43,7 +44,7 @@ extends Controller with I18nSupport {
 
   def details(id: Long) = Action { implicit request =>
     Logger.info("details called. id: " + id)
-    val review = service.findById(id).get
+    val review = Awaits.get(5,service.findById(id)).get
     Ok(views.html.review_details(Some(id), reviewForm.fill(review),productService.findAllProducts))
   }
 
@@ -59,8 +60,8 @@ extends Controller with I18nSupport {
         }else {
             Logger.info("Review: " + review)
             if (review.productId==null || review.productId.getOrElse(0)==0) throw new IllegalArgumentException("Product Id Cannot Be Null")
-            val id = service.insert(review)
-            Redirect(routes.ReviewController.index).flashing("success" -> Messages("success.insert", id))        
+            service.insert(review)
+            Redirect(routes.ReviewController.index).flashing("success" -> Messages("success.insert", "new Review"))        
         }
       })
   }
@@ -78,10 +79,16 @@ extends Controller with I18nSupport {
   }
 
   def remove(id: Long)= Action {
-      service.findById(id).map { review =>
+
+      import play.api.libs.concurrent.Execution.Implicits.defaultContext
+    
+      val result =  Awaits.get(5,service.findById(id))
+      
+      result.map { review =>
         service.remove(id)
         Redirect(routes.ReviewController.index).flashing("success" -> Messages("success.delete", review.productId))
       }.getOrElse(NotFound)
+
   }
  
   
