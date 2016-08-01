@@ -2,10 +2,14 @@ import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.OneBrowserPerSuite
 import org.scalatestplus.play.HtmlUnitFactory
 import org.scalatestplus.play.OneServerPerSuite
+import utils.DBCleaner
  
 class ProductControllerTestSpec extends PlaySpec with OneServerPerSuite with OneBrowserPerSuite with HtmlUnitFactory {
     
   "ProductController" should {
+    
+     DBCleaner.cleanUp()
+    
     "insert a new product should be ok" in {
         
           goTo(s"http://localhost:${port}/product/add")
@@ -56,6 +60,10 @@ class ProductControllerTestSpec extends PlaySpec with OneServerPerSuite with One
           goTo(s"http://localhost:${port}/product")
           click on id("btnDelete")
     }
+    
+    "Cleanup db in the end" in {
+        DBCleaner.cleanUp()
+     }
     
   }
   

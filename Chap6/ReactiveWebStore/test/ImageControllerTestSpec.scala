@@ -2,8 +2,11 @@ import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.OneBrowserPerSuite
 import org.scalatestplus.play.HtmlUnitFactory
 import org.scalatestplus.play.OneServerPerSuite
+import utils.DBCleaner
  
 class ImageControllerTestSpec  extends PlaySpec with OneServerPerSuite with OneBrowserPerSuite with HtmlUnitFactory {
+    
+    DBCleaner.cleanUp()
   
     "ImageController" should {
       "insert a new image should be ok" in {
@@ -47,6 +50,10 @@ class ImageControllerTestSpec  extends PlaySpec with OneServerPerSuite with OneB
             
             goTo(s"http://localhost:${port}/image")
             click on id("btnDelete")
+      }
+      
+      "Cleanup db in the end" in {
+          DBCleaner.cleanUp()
       }
       
   }
