@@ -3,8 +3,10 @@ package mocks
 import scala.concurrent.Future
 import dao.ReviewDao
 import models.Review
+import slick.lifted.TableQuery
+import dao.IReviewDao
 
-class ReviewMockedDao extends ReviewDao(null) {
+class ReviewMockedDao extends IReviewDao {
   
   val dao:GenericMockedDao[Review] = new GenericMockedDao[Review]()
   
@@ -27,5 +29,9 @@ class ReviewMockedDao extends ReviewDao(null) {
   override def update(p2:Review): Future[Unit] = {
     dao.update(p2)
   } 
+  
+  override def toTable:TableQuery[_] = {
+    null
+  }
   
 }

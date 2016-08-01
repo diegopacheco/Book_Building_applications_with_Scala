@@ -2,14 +2,14 @@ import org.scalatestplus.play._
 import scala.collection.mutable
 import services.IProductService
 import services.ProductService
-import mocks.ProductDaoMocked
 import utils.Awaits
+import mocks.ProductMockedDao
 
 class ProductServiceTestSpec extends PlaySpec {
     
     "ProductService" must {
         
-        val service:IProductService = new ProductService(new ProductDaoMocked)
+        val service:IProductService = new ProductService(new ProductMockedDao)
       
         "insert a product properly" in {
            val product = new models.Product(Some(1),"Ball","Awesome Basketball",19.75)

@@ -9,7 +9,15 @@ import slick.driver.JdbcProfile
 import slick.jdbc.GetResult
 import models.Image
 
-class ImageDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] with BaseDao[Image] {
+trait IImageDao extends BaseDao[Image]{
+  def findAll(): Future[Seq[Image]]
+  def findById(id:Long): Future[Option[Image]]
+  def remove(id:Long): Future[Int]
+  def insert(p:Image): Future[Unit]
+  def update(p2:Image): Future[Unit] 
+}
+
+class ImageDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] with IImageDao {
   
   import driver.api._
   

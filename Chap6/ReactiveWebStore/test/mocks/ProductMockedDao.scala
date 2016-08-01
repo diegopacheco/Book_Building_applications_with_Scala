@@ -6,7 +6,7 @@ import models.Product
 import dao.IProductDao
 import slick.lifted.TableQuery
 
-class ProductDaoMocked extends IProductDao {
+class ProductMockedDao extends IProductDao {
   
   val dao:GenericMockedDao[Product] = new GenericMockedDao[Product]()
   

@@ -14,6 +14,10 @@ import services.ReviewService
 import services.RndService
 import dao.IProductDao
 import dao.ProductDao
+import dao.ImageDao
+import dao.IImageDao
+import dao.ReviewDao
+import dao.IReviewDao
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -42,6 +46,8 @@ class Module extends AbstractModule {
     bind(classOf[IRndService]).to(classOf[RndService]).asEagerSingleton()
     
     bind(classOf[IProductDao]).to(classOf[ProductDao]).asEagerSingleton()
+    bind(classOf[IImageDao]).to(classOf[ImageDao]).asEagerSingleton()
+    bind(classOf[IReviewDao]).to(classOf[ReviewDao]).asEagerSingleton()
     
   }
 

@@ -4,8 +4,10 @@ import dao.ImageDao
 import models.Image
 import scala.concurrent.Future
 import models.Review
+import slick.lifted.TableQuery
+import dao.IImageDao
 
-class ImageMockedDao extends ImageDao(null) {
+class ImageMockedDao extends IImageDao {
   
   val dao:GenericMockedDao[Image] = new GenericMockedDao[Image]()
   
@@ -28,5 +30,9 @@ class ImageMockedDao extends ImageDao(null) {
   override def update(p2:Image): Future[Unit] = {
     dao.update(p2)
   } 
+  
+  override def toTable:TableQuery[_] = {
+    null
+  }
   
 }

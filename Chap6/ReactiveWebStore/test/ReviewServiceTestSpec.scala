@@ -23,7 +23,7 @@ class ReviewServiceTestSpec extends PlaySpec {
         
         "not update because does not exist" in {
           intercept[RuntimeException]{
-             service.update(333,null)
+             Awaits.get(5, service.update(333,null))
           }
         }
         
@@ -45,16 +45,16 @@ class ReviewServiceTestSpec extends PlaySpec {
         }
         
         "remove 1 review" in {
-          val review = service.remove(1)
-          review mustBe true
+          val review = Awaits.get(5, service.remove(1))
+          review mustBe 1
           
-          val oldReview= service.findById(1)
+          val oldReview= Awaits.get(5, service.findById(1))
           oldReview mustBe None
         }
         
         "not remove because does not exist" in {
           intercept[RuntimeException]{
-             service.remove(-1)
+             Awaits.get(5, service.remove(-1))
           }
         }
         

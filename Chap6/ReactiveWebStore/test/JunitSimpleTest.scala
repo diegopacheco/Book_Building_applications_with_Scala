@@ -5,9 +5,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Suite
 import org.scalatest.junit.AssertionsForJUnit
 import org.scalatestplus.play.PlaySpec
-
-import mocks.ProductDaoMocked
 import services.ProductService
+import mocks.ProductMockedDao
 
 @RunWith(classOf[Suite])
 @Suite.SuiteClasses(Array(classOf[JunitSimpleTest]))
@@ -16,7 +15,7 @@ class JunitSimpleSuiteTest
 class JunitSimpleTest extends PlaySpec with AssertionsForJUnit {
    
   @Test def testBaseService() {
-    val s = new ProductService(new ProductDaoMocked)
+    val s = new ProductService(new ProductMockedDao)
     val result = s.findAll()
     assertEquals(None, result)
     assertTrue( result != null)

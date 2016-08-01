@@ -9,7 +9,15 @@ import slick.driver.JdbcProfile
 import slick.jdbc.GetResult
 import models.Review
 
-class ReviewDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] with BaseDao[Review] {
+trait IReviewDao extends BaseDao[Review]{
+  def findAll(): Future[Seq[Review]]
+  def findById(id:Long): Future[Option[Review]]
+  def remove(id:Long): Future[Int]
+  def insert(p:Review): Future[Unit]
+  def update(p2:Review): Future[Unit] 
+}
+
+class ReviewDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] with IReviewDao {
   
   import driver.api._
   

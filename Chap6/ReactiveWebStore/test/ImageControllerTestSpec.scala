@@ -19,30 +19,30 @@ class ImageControllerTestSpec  extends PlaySpec with OneServerPerSuite with OneB
             goTo(s"http://localhost:${port}/image/add")
             singleSel("productId").value = "1"
             click on id("url")
-            enter("http://myimage.com/img.jpg")
+            enter("https://thegoalisthering.files.wordpress.com/2012/01/bluetennisball_display_image.jpg")
             submit()
             
       }
       
       "details from the image 1 should be ok" in {
             goTo(s"http://localhost:${port}/image/details/1")
-            textField("url").value mustBe "http://myimage.com/img.jpg"
+            textField("url").value mustBe "https://thegoalisthering.files.wordpress.com/2012/01/bluetennisball_display_image.jpg"
       }
       
       "update image 1 should be ok" in {
             goTo(s"http://localhost:${port}/image/details/1")
-            textField("url").value = "http://myimage.com/img2.jpg"
+            textField("url").value = "https://thegoalisthering.files.wordpress.com/2012/01/bluetennisball_display_image2.jpg"
             submit()
             
             goTo(s"http://localhost:${port}/image/details/1")
-            textField("url").value mustBe "http://myimage.com/img2.jpg"
+            textField("url").value mustBe "https://thegoalisthering.files.wordpress.com/2012/01/bluetennisball_display_image2.jpg"
       }
       
       "delete a image should be ok" in {
             goTo(s"http://localhost:${port}/image/add")    
             singleSel("productId").value = "1"
             click on id("url")
-            enter("http://myimage.com/img.jpg")
+            enter("https://thegoalisthering.files.wordpress.com/2012/01/bluetennisball_display_image.jpg")
             submit()
             
             goTo(s"http://localhost:${port}/image")

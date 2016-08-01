@@ -1,13 +1,13 @@
 package services
 
 import scala.concurrent.Future
-
 import dao.ImageDao
 import javax.inject.Inject
 import javax.inject.Singleton
 import models.Image
 import play.api.libs.concurrent.Execution.Implicits
 import utils.Awaits
+import dao.IImageDao
 
 trait IImageService extends BaseService[Image]{
   def insert(image:Image):Future[Unit]
@@ -18,7 +18,7 @@ trait IImageService extends BaseService[Image]{
 }
 
 @Singleton
-class ImageService @Inject() (dao:ImageDao) extends IImageService {
+class ImageService @Inject() (dao:IImageDao) extends IImageService {
   
   import play.api.libs.concurrent.Execution.Implicits.defaultContext
   

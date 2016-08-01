@@ -23,7 +23,7 @@ class ImageServiceTestSpec extends PlaySpec {
         
         "not update because does not exist" in {
           intercept[RuntimeException]{
-             service.update(333,null)
+             Awaits.get(5, service.update(333,null))
           }
         }
         
@@ -43,16 +43,16 @@ class ImageServiceTestSpec extends PlaySpec {
         }
         
         "remove 1 image" in {
-          val image = service.remove(1)
-          image mustBe true
+          val image = Awaits.get(5,service.remove(1))
+          image mustBe 1
           
-          val oldImage = service.findById(1)
+          val oldImage = Awaits.get(5,service.findById(1))
           oldImage mustBe None
         }
         
         "not remove because does not exist" in {
           intercept[RuntimeException]{
-             service.remove(-1)
+             Awaits.get(5,service.remove(-1))
           }
         }
         

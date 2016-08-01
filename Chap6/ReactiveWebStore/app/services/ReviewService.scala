@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicLong
 import scala.concurrent.Future
 import dao.ReviewDao
 import utils.Awaits
+import dao.IReviewDao
 
 trait IReviewService extends BaseService[Review]{
   def insert(review:Review):Future[Unit]
@@ -17,7 +18,7 @@ trait IReviewService extends BaseService[Review]{
 }
 
 @Singleton
-class ReviewService @Inject() (dao:ReviewDao)  extends IReviewService{
+class ReviewService @Inject() (dao:IReviewDao)  extends IReviewService{
   
   import play.api.libs.concurrent.Execution.Implicits.defaultContext
   
