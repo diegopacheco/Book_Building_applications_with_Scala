@@ -8,14 +8,14 @@ class GenericMockedDao[T <: BaseModel] {
   import scala.collection.mutable.HashMap
   
   import scala.concurrent._
-  import ExecutionContext.Implicits.global
+  import play.api.libs.concurrent.Execution.Implicits.defaultContext
   
   var inMemoryDB = new HashMap[Long,T]
   var idCounter = new AtomicLong(0)
   
   def findAll(): Future[Seq[T]] = {
      Future {
-        if (inMemoryDB.values.toList == null || inMemoryDB.values.toList.size==0) return Future { List().toSet[T].toSeq }
+        if (inMemoryDB.values.toList == null || inMemoryDB.values.toList.size==0) Seq()
         inMemoryDB.values.toSeq
      }
   }
