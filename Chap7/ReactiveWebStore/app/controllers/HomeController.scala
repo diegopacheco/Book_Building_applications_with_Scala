@@ -11,4 +11,8 @@ class HomeController @Inject() extends Controller {
     Ok(views.html.index("Welcome to ReactiveWebStore")(Flash(Map("success" -> "Welcome!"))))
   }
   
+  def reports = Action {
+    Ok(views.html.reports_index()(Flash(Map())))
+  }
+  
 }

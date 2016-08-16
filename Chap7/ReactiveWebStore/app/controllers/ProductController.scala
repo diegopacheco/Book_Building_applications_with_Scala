@@ -13,6 +13,11 @@ import play.api.i18n.MessagesApi
 import services.IProductService
 import play.Application
 import utils.Awaits
+import play.api.mvc.Result
+import play.api.mvc.ResponseHeader
+import play.api.libs.iteratee.Enumerator
+import reports.ReportBuilder
+
 
 @Singleton
 class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProductService) extends Controller with I18nSupport {
@@ -76,6 +81,15 @@ class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProd
         service.remove(id)
         Redirect(routes.ProductController.index).flashing("success" -> Messages("success.delete", product.name))
       }.getOrElse(NotFound)
+  }
+  
+  def report() = Action {
+       import play.api.libs.concurrent.Execution.Implicits.defaultContext
+       
+       Ok.chunked( Enumerator.fromStream( ReportBuilder.toPdf("products.jrxml") ) )
+         .withHeaders(CONTENT_TYPE -> "application/octet-stream")
+         .withHeaders(CONTENT_DISPOSITION -> "attachment; filename=report-products.pdf"
+       )
   }
   
 }
