@@ -56,20 +56,22 @@ class RndService @Inject() (ws: WSClient) extends IRndService {
         } 
         
         var observableEven = Observable.create { doubleInfiniteStreamSubject.subscribe }
-          .subscribeOn(IOScheduler())
+          //.subscribeOn(IOScheduler())
+          .onErrorReturn { x => 2.0 }
           .flatMap { x => Observable.from( Iterable.fill(1)(x + 10) ) }
           .filter { x => x.toInt % 2 == 0 }
           .flatMap { x => println("ODD: " + x) ; Observable.just(x) }
           
         var observableOdd = Observable.create { doubleInfiniteStreamSubject.subscribe }
-          .subscribeOn(IOScheduler())
+          //.subscribeOn(IOScheduler())
+          .onErrorReturn { x => 1.0 }
           .flatMap { x => Observable.from( Iterable.fill(1)(x + 10) ) }
           .filter { x => x.toInt % 2 != 0 }
           .flatMap { x => println("EVEN: " + x) ; Observable.just(x) }
         
         var mergeObservable = Observable
            .empty
-           .subscribeOn(IOScheduler())       
+           //.subscribeOn(IOScheduler())       
            .merge(observableEven)
            .merge(observableOdd)
            .take(10)
