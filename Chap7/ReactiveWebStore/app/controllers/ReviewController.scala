@@ -15,6 +15,8 @@ import play.Application
 import services.IReviewService
 import models.Review
 import utils.Awaits
+import reports.ReportBuilder
+import play.api.libs.iteratee.Enumerator
 
 @Singleton
 class ReviewController @Inject() 
@@ -90,6 +92,14 @@ extends Controller with I18nSupport {
       }.getOrElse(NotFound)
 
   }
- 
+  
+  def report() = Action {
+       import play.api.libs.concurrent.Execution.Implicits.defaultContext
+       
+       Ok.chunked( Enumerator.fromStream( ReportBuilder.toPdf("Reviews.jrxml") ) )
+         .withHeaders(CONTENT_TYPE -> "application/octet-stream")
+         .withHeaders(CONTENT_DISPOSITION -> "attachment; filename=report-reviews.pdf"
+       )
+  }
   
 }

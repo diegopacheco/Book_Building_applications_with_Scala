@@ -15,7 +15,6 @@ POST /product/             controllers.ProductController.insert
 POST /product/:id          controllers.ProductController.update(id:Long)
 POST /product:id/remove    controllers.ProductController.remove(id:Long)
 GET  /product/details/:id  controllers.ProductController.details(id:Long)
-GET  /product/report       controllers.ProductController.report
 
 #
 # Complete GRUD for Review
@@ -46,3 +45,11 @@ GET   /rnd/double  controllers.RndDoubleGeneratorController.rndDouble
 GET   /rnd/call    controllers.RndDoubleGeneratorController.rndCall
 GET   /rnd/rx      controllers.RndDoubleGeneratorController.rxCall
 GET   /rnd/rxbat   controllers.RndDoubleGeneratorController.rxScalaCallBatch
+
+#
+# Reports
+#
+GET  /product/report       controllers.ProductController.report
+GET  /review/report        controllers.ReviewController.report
+GET  /image/report         controllers.ImageController.report
+

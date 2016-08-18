@@ -86,7 +86,7 @@ class ProductController @Inject() (val messagesApi:MessagesApi,val service:IProd
   def report() = Action {
        import play.api.libs.concurrent.Execution.Implicits.defaultContext
        
-       Ok.chunked( Enumerator.fromStream( ReportBuilder.toPdf("products.jrxml") ) )
+       Ok.chunked( Enumerator.fromStream( ReportBuilder.toPdf("Products.jrxml") ) )
          .withHeaders(CONTENT_TYPE -> "application/octet-stream")
          .withHeaders(CONTENT_DISPOSITION -> "attachment; filename=report-products.pdf"
        )

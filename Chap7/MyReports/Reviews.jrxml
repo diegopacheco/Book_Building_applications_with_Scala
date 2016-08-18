@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-08-12T00:12:22 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+<!-- 2016-08-17T20:58:14 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reviews" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
@@ -60,24 +60,13 @@
 		</queryString>
 	</subDataset>
 	<queryString>
-		<![CDATA[Select * from Product]]>
+		<![CDATA[Select p.name, r.author, r.comment
+from Product p, Review r
+where p.id = r.product_id;]]>
 	</queryString>
-	<field name="ID" class="java.lang.Integer"/>
-	<field name="NAME" class="java.lang.String"/>
-	<field name="DETAILS" class="java.lang.String"/>
-	<field name="PRICE" class="java.lang.Double"/>
-	<group name="Gruppo1">
-		<groupExpression><![CDATA[$F{PRICE}]]></groupExpression>
-		<groupHeader>
-			<band height="20"/>
-		</groupHeader>
-		<groupFooter>
-			<band>
-				<property name="local_mesure_unitheight" value="pixel"/>
-				<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			</band>
-		</groupFooter>
-	</group>
+	<field name="name" class="java.lang.String"/>
+	<field name="author" class="java.lang.String"/>
+	<field name="comment" class="java.lang.String"/>
 	<title>
 		<band height="196" splitType="Stretch">
 			<staticText>
@@ -91,78 +80,64 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="210" height="25" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
+				<reportElement x="0" y="5" width="210" height="25" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
 					<font size="19" isBold="true"/>
 				</textElement>
-				<text><![CDATA[RWS Product Report]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" positionType="Float" x="430" y="100" width="76" height="20" forecolor="#000000" uuid="2db13169-1d14-4188-84ff-5429d1f13dd3"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PRICE]]></text>
+				<text><![CDATA[Reviews]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="70">
+		<band height="20">
 			<staticText>
-				<reportElement style="Column header" positionType="Float" x="0" y="-100" width="185" height="20" forecolor="#000000" uuid="eb8da721-8dbe-4425-ad16-00869e6d140d"/>
+				<reportElement style="Column header" positionType="Float" x="0" y="0" width="185" height="20" forecolor="#000000" uuid="e8e887b1-ddba-44dc-b96e-7e151cb03b40"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ID]]></text>
+				<text><![CDATA[name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" positionType="Float" x="100" y="-100" width="185" height="20" forecolor="#000000" uuid="c292fa7c-dc2e-4a14-8cdf-64c09aec0cd6"/>
+				<reportElement style="Column header" positionType="Float" x="185" y="0" width="185" height="20" forecolor="#000000" uuid="6c685875-4bea-4f11-9653-ed7c5d409681"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[NAME]]></text>
+				<text><![CDATA[author]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" positionType="Float" x="295" y="-95" width="105" height="20" forecolor="#000000" uuid="9646300e-7ff2-4d8b-8d3e-a83fbc615c48"/>
+				<reportElement style="Column header" positionType="Float" x="370" y="0" width="185" height="20" forecolor="#000000" uuid="eda821ad-6c48-4cc7-b696-49d281447d13"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[DETAILS]]></text>
+				<text><![CDATA[comment]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="23">
+		<band height="20">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="0" y="-100" width="90" height="20" uuid="6ff13b8d-f43a-4e8a-97f8-a8fa8fb6bc01"/>
+				<reportElement style="Detail" positionType="Float" x="0" y="0" width="185" height="20" uuid="bc52070a-59a8-4385-a77f-3670b241088a"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="100" y="-100" width="130" height="20" uuid="675cb7b3-da35-45dc-bad7-77e02559f305"/>
+				<reportElement style="Detail" positionType="Float" x="185" y="0" width="185" height="20" uuid="b4b552a8-a260-4f18-ace8-99812c711e79"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{author}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="290" y="-100" width="125" height="20" uuid="7a09a4e2-3129-457b-a3cb-88d1e2f93e1d"/>
+				<reportElement style="Detail" positionType="Float" x="370" y="0" width="185" height="20" uuid="345f13f7-af34-4901-9940-4d1c0b750fcb"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{DETAILS}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="420" y="-10" width="125" height="20" uuid="85770d62-cdcf-4ef9-8250-0b8bbeb8fec8"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{PRICE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{comment}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

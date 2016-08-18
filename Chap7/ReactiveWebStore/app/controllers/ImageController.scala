@@ -18,6 +18,8 @@ import play.api.mvc.Controller
 import services.IImageService
 import services.IProductService
 import utils.Awaits
+import reports.ReportBuilder
+import play.api.libs.iteratee.Enumerator
 
 @Singleton
 class ImageController @Inject() 
@@ -89,6 +91,15 @@ extends Controller with I18nSupport {
         Redirect(routes.ImageController.index).flashing("success" -> Messages("success.delete", image.id))
       }.getOrElse(NotFound)
       
+  }
+  
+  def report() = Action {
+       import play.api.libs.concurrent.Execution.Implicits.defaultContext
+       
+       Ok.chunked( Enumerator.fromStream( ReportBuilder.toPdf("Images.jrxml") ) )
+         .withHeaders(CONTENT_TYPE -> "application/octet-stream")
+         .withHeaders(CONTENT_DISPOSITION -> "attachment; filename=report-images.pdf"
+       )
   }
   
 }
