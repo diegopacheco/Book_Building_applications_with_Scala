@@ -17,9 +17,10 @@ import akka.testkit.DefaultTimeout
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.WordSpecLike
 import org.scalatest.Matchers
+import akka.testkit._
 
 class ChatBotAdminActorSpec extends TestKit(ActorSystem("test")) 
-  with DefaultTimeout with ImplicitSender
+  with ImplicitSender
   with WordSpecLike with Matchers with BeforeAndAfterAll {
   
   "ChatBotAdminActor" should {
@@ -31,8 +32,8 @@ class ChatBotAdminActorSpec extends TestKit(ActorSystem("test"))
         val actorRef = TestActorRef[ChatBotAdminActor](Props(new ChatBotAdminActor(system)))
         val botActor = actorRef.underlyingActor
         assert(botActor.context != null)
-        
-        receiveOne(11 seconds)
+        awaitCond(botActor.room != null )
+        awaitCond(botActor.cancellable != null )
     }
   }
   
