@@ -12,22 +12,27 @@ import org.scalatestplus.play._
 import scala.concurrent.duration.DurationInt
 import actors.ChatBotAdminActor
 import actors.Tick
+import akka.testkit.ImplicitSender
+import akka.testkit.DefaultTimeout
+import org.scalatest.BeforeAndAfterAll
+import org.scalatest.WordSpecLike
+import org.scalatest.Matchers
 
-class ChatBotAdminActorSpec extends PlaySpec  {
-  
-  class Actors extends TestKit(ActorSystem("test")) 
+class ChatBotAdminActorSpec extends TestKit(ActorSystem("test")) 
+  with DefaultTimeout with ImplicitSender
+  with WordSpecLike with Matchers with BeforeAndAfterAll {
   
   "ChatBotAdminActor" should {
     
-      "be able to create Bot Admin in the Chat Room and Tick" in new Actors {
+      "be able to create Bot Admin in the Chat Room and Tick" in  {
         
         val probe1 = new TestProbe(system)
         
         val actorRef = TestActorRef[ChatBotAdminActor](Props(new ChatBotAdminActor(system)))
         val botActor = actorRef.underlyingActor
         assert(botActor.context != null)
-  
-        receiveOne(11 seconds)            
+        
+        receiveOne(11 seconds)
     }
   }
   
