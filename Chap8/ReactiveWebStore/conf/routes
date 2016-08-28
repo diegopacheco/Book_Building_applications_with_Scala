@@ -53,3 +53,9 @@ GET  /product/report       controllers.ProductController.report
 GET  /review/report        controllers.ReviewController.report
 GET  /image/report         controllers.ImageController.report
 
+
+#
+# Akka and Websockets 
+#
+GET /chat/index_socket   controllers.ChatController.index_socket
+GET /chat/ws             controllers.ChatController.ws
