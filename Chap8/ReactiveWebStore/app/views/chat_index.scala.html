@@ -39,8 +39,13 @@
   <h2>WebSocket Play Simple chat with Akka</h2>
   <div id="output"></div>    
 
+  <BR>
   user:	   <input type="text" name="txtUser" id="txtUser" /> <BR>
   message: <input type="text" name="txtMessage" id="txtMessage" /> <BR>
-  <input type="button" name="btnSendMsg" id="btnSendMsg" onclick="doSend( document.getElementById('txtUser').value + ':' + document.getElementById('txtMessage').value );" value="send!" /> 
+  <BR>
+  
+  <a href="@routes.ImageController.blank" class="btn btn-success" 
+  onclick="doSend( document.getElementById('txtUser').value + ':' + document.getElementById('txtMessage').value );">
+  <i class="icon-plus icon-white"></i>Send Message</a>
   
 }
