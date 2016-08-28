@@ -4,7 +4,7 @@
 
   <!DOCTYPE html>
   <meta charset="utf-8" />
-  <title>WebSocket Play Simple chat with Akka</title>
+  <title>Chat Room</title>
   <script type="text/javascript">
 	  var output;
 	  var websocket = new WebSocket("ws://localhost:9000/chat/ws");
@@ -13,7 +13,7 @@
 	    output = document.getElementById("output");
 	    
 	    websocket.onmessage = function(evt) { 
-	    	writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+ '</span>'); 
+	    	writeToScreen('<span style="color:blue;">' + evt.data+ '</span>'); 
 		};
 		
 	    websocket.onerror = function(evt) { 
@@ -22,7 +22,6 @@
 	  }
 	  
 	  function doSend(message){
-	    writeToScreen("SENT: " + message);
 	    websocket.send(message);
 	  }
 	
@@ -30,22 +29,25 @@
 	    var pre = document.createElement("p");
 	    pre.style.wordWrap = "break-word";
 	    pre.innerHTML = message;
-	    output.appendChild(pre);
+	    $('#output').prepend(pre);
 	  }
 	
 	  window.addEventListener("load", init, false);
   </script>
 
-  <h2>WebSocket Play Simple chat with Akka</h2>
-  <div id="output"></div>    
+  <h3>Messages</h3>
+  <div id="output" style="width: 800px; height: 250px; overflow-y: scroll;" >
+  </div>
 
-  <BR>
-  user:	   <input type="text" name="txtUser" id="txtUser" /> <BR>
-  message: <input type="text" name="txtMessage" id="txtMessage" /> <BR>
-  <BR>
-  
-  <a href="#" class="btn btn-success" 
-  onclick="doSend( document.getElementById('txtUser').value + ':' + document.getElementById('txtMessage').value );">
-  <i class="icon-plus icon-white"></i>Send Message</a>
-  
+  <div id="contentMessage">	
+	  <BR>
+	  user:	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	  <input type="text" name="txtUser" id="txtUser" /> <BR><BR>
+	  message: <input type="text" name="txtMessage" id="txtMessage" /> <BR>
+	  <BR>
+	  
+	  <a href="#" class="btn btn-success" 
+	  onclick="doSend( document.getElementById('txtUser').value + ':' + document.getElementById('txtMessage').value );">
+	  <i class="icon-plus icon-white"></i>Send Message</a>
+  </div>
 }

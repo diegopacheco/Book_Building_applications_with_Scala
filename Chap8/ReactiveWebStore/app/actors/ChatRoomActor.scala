@@ -15,13 +15,13 @@ class ChatRoomActor extends Actor with ActorLogging {
 
   def receive = LoggingReceive {
     case msg: ChatMessage =>
-      println("users in the room: " + users)
-      println("users counter: " + users.size)
       users foreach { _ ! msg }
     case JoinChatRoom =>
       users += sender
-      println("user: " + sender + " enters the room")
       context watch sender
+    case GetStats =>
+      val stats:String = "online users[" + users.size + "] - users[" + users.map( a => a.hashCode().toString() ).mkString("|") + "]"
+      sender ! stats
     case Terminated(user) =>
       users -= user
   }
