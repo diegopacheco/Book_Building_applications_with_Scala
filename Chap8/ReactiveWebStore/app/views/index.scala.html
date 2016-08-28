@@ -2,25 +2,21 @@
 
 @main("Welcome to Reactive Web Store"){
   
-  <div class="container-fluid">
-  	  <div class="row">
-  	  	<BR>
-  	  </div>
-	  <div class="row">
-	  		<div class="col-sm-4" >
-		    </div>
-			<div class="col-sm-4" >
-				         <a href="/product"><img height="42" width="42" src="@routes.Assets.at("images/product.png")"> Manage Products</a><BR>
-				   		 <a href="/review"><img height="42" width="42"  src="@routes.Assets.at("images/review.png")"> Manage Reviews</a><BR>
-				   		 <a href="/image"><img height="42" width="42"   src="@routes.Assets.at("images/image.png")"> Manage Images</a><BR>
-		    </div>
-		    <div class="col-sm-4" >
-				      	 <a href="/reports"><img height="42" width="42" src="@routes.Assets.at("images/reports.png")"> Reports </a><BR>
-				      	 <a href="/chat/index_socket"><img height="42" width="42" src="@routes.Assets.at("images/chat.png")"> Chat Room </a><BR>
-		    </div>
-			<div class="col-sm-4" >
-		    </div>		    
-	  </div>
+  <div class="row-fluid">
+  	  <BR>
+  	  <div class="span12">
+		  <div class="row-fluid">
+				 <div class="span6">
+					         <a href="/product"><img height="42" width="42" src="@routes.Assets.at("images/product.png")"> Manage Products</a><BR>
+					   		 <a href="/review"><img height="42" width="42"  src="@routes.Assets.at("images/review.png")"> Manage Reviews</a><BR>
+					   		 <a href="/image"><img height="42" width="42"   src="@routes.Assets.at("images/image.png")"> Manage Images</a><BR>
+			    </div>
+			    <div class="span6">
+					      	 <a href="/reports"><img height="42" width="42" src="@routes.Assets.at("images/reports.png")"> Reports </a><BR>
+					      	 <a href="/chat/index_socket"><img height="42" width="42" src="@routes.Assets.at("images/chat.png")"> Chat Room </a><BR>
+			    </div>
+		  </div>
+	</div>		  
   </div>
    
 }
