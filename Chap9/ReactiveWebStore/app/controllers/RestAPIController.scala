@@ -11,6 +11,7 @@ import models.ImagesJson
 import utils.Awaits
 import services.IReviewService
 import services.IImageService
+import backpresurre.LeakyBucket
 
 @Singleton
 class RestAPIController @Inject() 
@@ -19,7 +20,7 @@ class RestAPIController @Inject()
     val imageService:IImageService) extends Controller {
    
    import play.api.libs.concurrent.Execution.Implicits.defaultContext
-  
+      
    def listAllProducts = Action {
       val future = productService.findAll()
       val products =  Awaits.get(5,future)
@@ -34,11 +35,25 @@ class RestAPIController @Inject()
       Ok(json)
    }
    
+   import scala.concurrent.duration._
+   var bucket = new LeakyBucket(5, 60 seconds)
+   
+   def processImages = {
+       val future  =  imageService.findAll()
+       val images  =  Awaits.get(5,future)
+       val json    =  ImagesJson.toJson(images)
+       json
+   }
+     
+   def processFailure = {
+     Json.toJson("Too Many Requests - Try Again later... ")
+   }  
+   
    def listAllImages = Action {
-      val future  =  imageService.findAll()
-      val images  =  Awaits.get(5,future)
-      val json    =  ImagesJson.toJson(images)
-      Ok(json)
+     bucket.dropToBucket() match {
+       case true  => Ok(processImages) 
+       case false => InternalServerError(processFailure.toString())
+     }
    }
   
 }
