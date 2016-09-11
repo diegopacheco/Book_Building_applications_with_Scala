@@ -16,3 +16,27 @@ extends BaseModel{
 object ReviewDef{
   def toTable:String = "Review"
 }
+
+object ReviewsJson {
+  
+   import play.api.libs.json._
+   import play.api.libs.json.Reads._
+   import play.api.libs.functional.syntax._
+  
+   implicit val reviewWrites: Writes[Review] = (
+    (JsPath \ "id").write[Option[Long]] and
+    (JsPath \ "productId").write[Option[Long]] and
+    (JsPath \ "author").write[String] and
+    (JsPath \ "comment").write[String]
+    )(unlift(Review.unapply))
+
+   implicit val reviewReads: Reads[Review] = (
+    (JsPath \ "id").readNullable[Long] and
+    (JsPath \ "productId").readNullable[Long] and 
+    (JsPath \ "details").read[String] and
+    (JsPath \ "price").read[String]
+    )(Review.apply _)
+   
+   def toJson(reviews:Option[Seq[Review]]) = Json.toJson(reviews)  
+    
+}
