@@ -1,20 +1,17 @@
-package models
+package proxy
+
+import client.WSFactory
+import utils.Awaits
 
 case class Review
  (var id:Option[Long],
   var productId:Option[Long],
   var author:String,
   var comment:String)
-extends BaseModel{
+{
   override def toString:String = {
     "Review { id: " + id + " ,productId: " + productId.getOrElse(0) + ",author: " + author + ",comment: " + comment +  " }" 
   }
-  override def getId:Option[Long] = id
-  override def setId(id:Option[Long]):Unit = this.id = id
-}
-
-object ReviewDef{
-  def toTable:String = "Review"
 }
 
 object ReviewsJson {
@@ -39,4 +36,26 @@ object ReviewsJson {
    
    def toJson(reviews:Option[Seq[Review]]) = Json.toJson(reviews)  
     
+}
+
+object ReviewProxy {
+    
+    import scala.concurrent.Future
+    import play.api.libs.json._
+    import ReviewsJson._
+    
+    val url = "http://localhost:9000/REST/api/review/all"
+    implicit val context = play.api.libs.concurrent.Execution.Implicits.defaultContext
+    
+    def listAll():Option[List[Review]] = {
+        val ws  = WSFactory.ws
+        val futureResult:Future[Option[List[Review]]] = ws.url(url).withHeaders("Accept" -> "application/json").get().map(
+            response => Json.parse(response.body).validate[List[Review]].asOpt
+        )
+        val reviews = Awaits.get(10, futureResult)
+        ws.close 
+        reviews
+    }
+
+  
 }

@@ -12,3 +12,4 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 resolvers += "amateras-repo" at "http://amateras.sourceforge.jp/mvn/"
 
 libraryDependencies += "com.typesafe.play" % "play-ws_2.11" % "2.5.6"
+libraryDependencies += "org.scalatest" % "scalatest_2.11" % "2.2.6" % Test
