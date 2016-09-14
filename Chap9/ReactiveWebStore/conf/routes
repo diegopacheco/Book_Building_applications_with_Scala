@@ -67,3 +67,6 @@ GET /chat/ws             controllers.ChatController.ws
 GET /REST/api/product/all   controllers.RestAPIController.listAllProducts
 GET /REST/api/review/all    controllers.RestAPIController.listAllReviews
 GET /REST/api/image/all     controllers.RestAPIController.listAllImages
+
+GET     /swagger.json           controllers.ApiHelpController.getResources
+
