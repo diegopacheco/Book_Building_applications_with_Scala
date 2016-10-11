@@ -17,6 +17,9 @@ import java.sql.DriverManager
 import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperFillManager
 import java.util.UUID
+import play.api.Play
+import net.sf.jasperreports.engine.design.JasperDesign
+import net.sf.jasperreports.engine.xml.JRXmlLoader
 
 object ReportBuilder {
     
@@ -26,9 +29,10 @@ object ReportBuilder {
   
     def compile(jrxml:String){
       if(reportCache.get(jrxml).getOrElse(true)){
-        JasperCompileManager.compileReportToFile( new File(".").getCanonicalFile + "/app/reports/" + jrxml , generateCompileFileName(jrxml))
+        val design:JasperDesign = JRXmlLoader.load( Play.resourceAsStream("/public/reports/" + jrxml)(Play.current).get )
+        JasperCompileManager.compileReportToFile(design, generateCompileFileName(jrxml))
         reportCache  += (jrxml -> false)
-      }
+      } 
     }
   
     def toPdf(jrxml:String):ByteArrayInputStream = {
