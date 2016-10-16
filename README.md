@@ -109,29 +109,29 @@ During his free time he enjoys playing wicked tunes on guitar, gaming, and blogg
 
 ### Some of his core skills include:
 
-Architecture 	Design and Architecture Coding for high scalable systems	
-Distributed 	Systems using SOA and Microservices Principles, tools, and 	techniques
-Performance Tuning & DevOps Engineering
-Functional 	Programming and Scala
-Agile 	Coaching & Servant Leadership for Architecture Teams
-Consultancy 	on Development Practices with XP / Kanban
+Architecture 	Design and Architecture Coding for high scalable systems <BR>	
+Distributed 	Systems using SOA and Microservices Principles, tools, and 	techniques <BR>	
+Performance Tuning & DevOps Engineering <BR>	
+Functional 	Programming and Scala <BR>	
+Agile 	Coaching & Servant Leadership for Architecture Teams <BR>	
+Consultancy 	on Development Practices with XP / Kanban <BR>	
 
 ### Links
 
-More about him can be found at the following:
-Linkedin:  https://www.linkedin.com/in/diegopachecors
-Blog: 	http://diego-pacheco.blogspot.in/
-Github:  https://github.com/diegopacheco
-Slideshare: http://www.slideshare.net/diego.pacheco/presentations
-Presentations: https://gist.github.com/diegopacheco/ad3e3804a5071ef219d1
+More about him can be found at the following: <BR>	
+Linkedin:  https://www.linkedin.com/in/diegopachecors <BR>	
+Blog: 	http://diego-pacheco.blogspot.in/ <BR>	
+Github:  https://github.com/diegopacheco <BR>	
+Slideshare: http://www.slideshare.net/diego.pacheco/presentations <BR>	
+Presentations: https://gist.github.com/diegopacheco/ad3e3804a5071ef219d1 <BR>	
 
 ### Recent Lectures
 
-His  recent lectures include:
+His  recent lectures include: <BR>	
 
-Netflix https://www.youtube.com/watch?v=Z4_rzsZd70o&feature=youtu.be
-QCon http://qconsp.com/sp2016/speaker/diego-pacheco
-Amazon http://www.meetup.com/Sao-Paulo-Amazon-Web-Services-AWS-Meetup/events/229283010
+Netflix https://www.youtube.com/watch?v=Z4_rzsZd70o&feature=youtu.be <BR>	
+QCon http://qconsp.com/sp2016/speaker/diego-pacheco <BR>	
+Amazon http://www.meetup.com/Sao-Paulo-Amazon-Web-Services-AWS-Meetup/events/229283010 <BR>	
 
 ## Acknowledgements
 
