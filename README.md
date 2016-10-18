@@ -109,12 +109,12 @@ During his free time he enjoys playing wicked tunes on guitar, gaming, and blogg
 
 ### Some of his core skills include:
 
-Architecture 	Design and Architecture Coding for high scalable systems <BR>	
-Distributed 	Systems using SOA and Microservices Principles, tools, and 	techniques <BR>	
-Performance Tuning & DevOps Engineering <BR>	
-Functional 	Programming and Scala <BR>	
-Agile 	Coaching & Servant Leadership for Architecture Teams <BR>	
-Consultancy 	on Development Practices with XP / Kanban <BR>	
+* Architecture Design and Architecture Coding for high scalable systems
+* Distributed Systems using SOA and Microservices Principles, tools, and 	techniques
+* Performance Tuning & DevOps Engineering
+* Functional Programming and Scala
+* Agile Coaching & Servant Leadership for Architecture Teams
+* Consultancy on Development Practices with XP / Kanban
 
 ### Links
 
