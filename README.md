@@ -119,19 +119,19 @@ Consultancy 	on Development Practices with XP / Kanban <BR>
 ### Links
 
 More about him can be found at the following: <BR>	
-Linkedin:  https://www.linkedin.com/in/diegopachecors <BR>	
-Blog: 	http://diego-pacheco.blogspot.in/ <BR>	
-Github:  https://github.com/diegopacheco <BR>	
-Slideshare: http://www.slideshare.net/diego.pacheco/presentations <BR>	
-Presentations: https://gist.github.com/diegopacheco/ad3e3804a5071ef219d1 <BR>	
+* Linkedin:  https://www.linkedin.com/in/diegopachecors
+* Blog: 	http://diego-pacheco.blogspot.in/ 
+* Github:  https://github.com/diegopacheco 
+* Slideshare: http://www.slideshare.net/diego.pacheco/presentations 
+* Presentations: https://gist.github.com/diegopacheco/ad3e3804a5071ef219d1 
 
 ### Recent Lectures
 
 His  recent lectures include: <BR>	
 
-Netflix https://www.youtube.com/watch?v=Z4_rzsZd70o&feature=youtu.be <BR>	
-QCon http://qconsp.com/sp2016/speaker/diego-pacheco <BR>	
-Amazon http://www.meetup.com/Sao-Paulo-Amazon-Web-Services-AWS-Meetup/events/229283010 <BR>	
+* Netflix https://www.youtube.com/watch?v=Z4_rzsZd70o&feature=youtu.be 
+* QCon http://qconsp.com/sp2016/speaker/diego-pacheco 
+* Amazon http://www.meetup.com/Sao-Paulo-Amazon-Web-Services-AWS-Meetup/events/229283010 
 
 ## Acknowledgements
 
