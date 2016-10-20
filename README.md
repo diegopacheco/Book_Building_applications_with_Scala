@@ -100,6 +100,8 @@ https://github.com/diegopacheco/Book_Building_applications_with_Scala/tree/maste
 5. Scalling up Microservices with Akka Cluster
 6. Scalling up the Infrastructure with Docker and AWS Cloud.
 
+Note: Chapter 10 Talks about scalability including: Akka Cluster, Docker, MySQL Server, AWS Cloud, NetflixOSS Stack(Eureka, Hystrix, Zuul, Dynomite) 
+
 https://github.com/diegopacheco/Book_Building_applications_with_Scala/tree/master/Chap10
 
 ## About the author
