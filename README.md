@@ -10,7 +10,7 @@ Buy the book: https://www.amazon.com/Building-applications-Scala-Diego-Pacheco-e
 2. Basic Constructs of the language like: var, val, for, if, switch, operator overload.
 3. Difference between Functional Programing and Object Oriented Programing
 4. Principles of Functional Programing: Immutability, No Side Effects, State Discipline, Composition and High Order Functions.
-5. Concepts of Functional Programing such as: Lambda, Recursion, For Comprehensions, Partial Functions, Nomads, Currying and functions.
+5. Concepts of Functional Programing such as: Lambda, Recursion, For Comprehensions, Partial Functions, Monads, Currying and functions.
 6. Pattern Matcher, Recursion, Reflection, Package Objects, implicits and Concurrency.
 
 https://github.com/diegopacheco/Book_Building_applications_with_Scala/tree/master/Chap1
