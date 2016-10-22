@@ -40,7 +40,7 @@ class ProductService extends IProductService{
   }
   
   def findAll():Option[List[Product]] = {
-     if (inMemoryDB.values.toList == null || inMemoryDB.values.toList.size==0) return None
+     if (inMemoryDB.values == Nil || inMemoryDB.values.toList.size==0) return None
      Some(inMemoryDB.values.toList)
   }
   
